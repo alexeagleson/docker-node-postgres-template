@@ -41,11 +41,11 @@ services:
       - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
 
     pgadmin-compose:
-        image: dpage/pgadmin4
-        environment:
-            PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
-            PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
-        ports:
-            - "16543:80"
-        depends_on:
-            - postgres
+      image: dpage/pgadmin4
+      environment:
+        PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
+        PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+      ports:
+        - "16543:80"
+      depends_on:
+        - postgres
