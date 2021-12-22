@@ -15,6 +15,7 @@ services:
       # Maps our current project directory `.` to
       # our working directory in the container
       - ./:/usr/src/app/
+      - /usr/src/app/node_modules
 
   # This is the configuration for our PostgreSQL database container
   # Note the `postgres` name is important, in out Node app when we refer
