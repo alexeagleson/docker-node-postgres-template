@@ -333,8 +333,6 @@ COPY . .
 # Necessary for your browser to send HTTP requests to your Node app
 EXPOSE 8080
 
-RUN curl www.google.com
-
 # Command to run when the container is ready
 # Separate arguments as separate values in the array
 CMD [ "npm", "run", "start"]
@@ -697,45 +695,45 @@ We're going to be creating a simple `docker-compose.yml` file to link our Node a
 ```yml
 version: '3.8'
 services:
-    # These are the configurations for our Node app
-    # When Docker Compose starts this container it will automatically
-    # use the Dockerfile in the directory to configure it
-    app:
-        build: .
-        depends_on:
-            # Our app does not work without our database
-            # so this ensures our database is loaded first
-            - postgres
-        ports:
-            - "8080:8080"
-        volumes:
-            # Maps our current project directory `.` to
-            # our working directory in the container
-            - ./:/usr/src/app/
+  # These are the configurations for our Node app
+  # When Docker Compose starts this container it will automatically
+  # use the Dockerfile in the directory to configure it
+  app:
+    build: .
+    depends_on:
+      # Our app does not work without our database
+      # so this ensures our database is loaded first
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      # Maps our current project directory `.` to
+      # our working directory in the container
+      - ./:/usr/src/app/
 
-    # This is the configuration for our PostgreSQL database container
-    # Note the `postgres` name is important, in out Node app when we refer
-    # to  `host: "postgres"` that value is mapped on the network to the 
-    # address of this container.
-    postgres:
-        image: postgres:14.1-alpine
-        restart: always
-        environment:
-            # You can set the value of environment variables
-            # in your docker-compose.yml file
-            # Our Node app will use these to connect
-            # to the database
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=root
-            - POSTGRES_DB=root
-        ports:
-            # Standard port for PostgreSQL databases
-            - "5432:5432"
-        volumes:
-            # When the PostgresSQL container is started it will run any scripts
-            # provided in the `docker-entrypoint-initdb.d` directory, this connects
-            # our seed file to that directory so that it gets run
-            - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+  # This is the configuration for our PostgreSQL database container
+  # Note the `postgres` name is important, in out Node app when we refer
+  # to  `host: "postgres"` that value is mapped on the network to the 
+  # address of this container.
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      # You can set the value of environment variables
+      # in your docker-compose.yml file
+      # Our Node app will use these to connect
+      # to the database
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=root
+    ports:
+      # Standard port for PostgreSQL databases
+      - "5432:5432"
+    volumes:
+      # When the PostgresSQL container is started it will run any scripts
+      # provided in the `docker-entrypoint-initdb.d` directory, this connects
+      # our seed file to that directory so that it gets run
+      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
 ```
 
 So with that `docker-compose.yml` file in place we are finally ready to run our new and highly improved application "suite" that includes a backend, frontend and database.
