@@ -12,6 +12,12 @@ And go to [http://localhost:8080]()
 
 All code from this tutorial as a complete package is available in [this repository](https://github.com/alexeagleson/docker-node-postgres-template).
 
+For more tutorials like this, follow me <a href="https://twitter.com/eagleson_alex?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">@eagleson_alex</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> on Twitter
+
+A video version of this tutorial is also available:
+
+{% youtube Te41e4urFO0 %}
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -715,6 +721,9 @@ services:
       # Maps our current project directory `.` to
       # our working directory in the container
       - ./:/usr/src/app/
+      # node_modules workaround for volumes
+      # https://stackoverflow.com/a/32785014
+      - /usr/src/app/node_modules
 
   # This is the configuration for our PostgreSQL database container
   # Note the `postgres` name is important, in out Node app when we refer
@@ -886,8 +895,3 @@ Please check some of my other learning tutorials.  Feel free to leave a comment 
 - [Webpack: The Basics](https://dev.to/alexeagleson/understanding-the-modern-web-stack-webpack-part-1-2mn1)
 
 - [Webpack: Loaders, Optimizations & Bundle Analysis](https://dev.to/alexeagleson/understanding-the-modern-web-stack-webpack-part-2-49bj)
-
----
-
-For more tutorials like this, follow me <a href="https://twitter.com/eagleson_alex?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">@eagleson_alex</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> on Twitter
-
