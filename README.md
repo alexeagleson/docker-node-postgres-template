@@ -60,8 +60,6 @@ There are two common development issues we will be replicating with this example
 
 If you follow this tutorial you will have a working application running on your machine and querying a Postgres DB without the need to have either Node.js or Postgres installed.  The only tool you will need is Docker.  
 
-scalability
-
 ## Prerequisites
 
 The only prerequisite software required to have installed for this tutorial is an IDE (code editor, I use VS Code) and Docker.  
