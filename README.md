@@ -49,7 +49,7 @@ There are two common development issues we will be replicating with this example
 
 - Your company's project relies on an older version of a tool (in our case [Node.js](https://nodejs.org/en/)) than the development team has installed on their machine
 
-- We want to make it easy to test the application with a copy of the database on the developers' local machine, without requiring them to install the database software (in our case Portgres)
+- We want to make it easy to test the application with a copy of the database on the developers' local machine, without requiring them to install the database software (in our case PostgreSQL)
 
 If you follow this tutorial you will have a working application running on your machine and querying a Postgres DB without the need to have either Node.js or Postgres installed.  The only tool you will need is Docker.  
 
@@ -87,7 +87,7 @@ Run the following command to download the `hello-world` image:
 docker pull hello-world
 ```
 
-That will pull the _image_ from Docker hub.  Important to get the terminology correct, we haven't created a _container_ yet.  A Docker image is a _set of instructions for how to create a container_.  If you are familair with web development, think of the image like HTML (blueprints) and the container like the DOM (the structure).  
+That will pull the _image_ from Docker hub.  Important to get the terminology correct, we haven't created a _container_ yet.  A Docker image is a _set of instructions for how to create a container_.  If you are familiar with web development, think of the image like HTML (blueprints) and the container like the DOM (the structure).  
 
 You can add additional instructions to the default image instructions in your `Dockerfile` which we will get to soon.
 
@@ -599,7 +599,7 @@ In the above code update you can see that we are serving up a directory called `
 
 We'll begin by creating the `public` directory that is being served from our Node app:
 
-```bassh
+```bash
 mkdir public
 ```
 
@@ -752,7 +752,7 @@ Once active you can finally test it out.  In our `docker-compose.yml` config we 
 
 With a cute little hover transition and everything!  Congratulations!
 
-If you are using the Docker Desktop GUI applicaiton you'll have a lot of options to stop all the containers at once, or view each one individually.  If you are using the command line you can stop both containers with this simple command (run from the project root directory for context):
+If you are using the Docker Desktop GUI application you'll have a lot of options to stop all the containers at once, or view each one individually.  If you are using the command line you can stop both containers with this simple command (run from the project root directory for context):
 
 ```bash
 docker-compose down
@@ -836,7 +836,7 @@ On the `Connection` tab values must match the `docker-compose.yml` file:
 
 Now you can navigate from the left bar:
 
-`Servers -> whatever-you-want -> Databases -> root -> Schemas -> public -> Tables -> emplyees`
+`Servers -> whatever-you-want -> Databases -> root -> Schemas -> public -> Tables -> employees`
 
 Right click `employees` an Query Tool:
 
