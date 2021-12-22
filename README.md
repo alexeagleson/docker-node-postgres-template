@@ -20,16 +20,16 @@ All code from this tutorial as a complete package is available in [this reposito
 1. [Installing Docker](#installing-docker)
 1. [Creating a Container](#creating-a-container)
 1. [Creating a Node App](#creating-a-node-app)
-1. [Deprecating Your Node App](#deprecating-your-node-app)
+1. [Deprecating the Node App](#deprecating-the-node-app)
 1. [Creating a Dockerfile](#creating-a-dockerfile)
 1. [Docker Layers and Cache](#docker-layers-and-cache)
-1. [Add a Docker Volume](#add-a-docker-volume)
+1. [Adding a Docker Volume](#add-a-docker-volume)
 1. [What is Docker-Compose?](#what-is-docker-compose)
-1. [Add a Database](#add-a-database)
-1. [Connect the App to the Database](#connect-the-app-to-the-database)
-1. [Add a Frontend](#add-a-frontend)
-1. [Create a Docker Compose YML File](#create-a-docker-compose-yml-file)
-1. [Add a pgAdmin Panel (Bonus)](#add-a-pgadmin-panel-bonus)
+1. [Adding a Database](#add-a-database)
+1. [Connecting the App to the Database](#connecting-the-app-to-the-database)
+1. [Adding a Frontend](#add-a-frontend)
+1. [Creating a Docker Compose YML File](#creating-a-docker-compose-yml-file)
+1. [Adding a pgAdmin Panel (Bonus)](#add-a-pgadmin-panel-bonus)
 1. [Wrapping Up](#wrapping-up)
 
 ## Introduction
@@ -236,7 +236,7 @@ Try editing your `server.js` file when your app is running (change "hello world"
 
 Once that is working continue to the next step!
 
-## Deprecating Your Node App
+## Deprecating the Node App
 
 This next part is kinda fun.  Let's intentionally turn this server into a legacy project.  
 
@@ -436,7 +436,7 @@ No you won't.  The app is running based on a copy of `server.js` inside the cont
 
 Of course there is, we need to introduce Docker volumes.
 
-## Add a Docker Volume
+## Adding a Docker Volume
 
 Docker uses the concept of [volumes](https://docs.docker.com/storage/volumes/) to allow you to _persist_ data between running containers.  
 
@@ -490,7 +490,7 @@ The process is to define the instructions for each of your services with Dockerf
 
 In this tutorial we are going to connect our Node app to a PostgreSQL database.  Before we can connect them of course we need to establish the database container.
 
-## Add a Database
+## Adding a Database
 
 Similar to Node, Docker Hub has a super simple easy to use image for [PostgreSQL](https://www.postgresql.org/).  Of course theres also images for MySQL, Mongo, Redis, etc, etc.  There's no reason you couldn't substitute your favourite out if you want (though if you're still new to Docker I'd suggest you stick with the tutorial for now).
 
@@ -500,7 +500,7 @@ Unlike our Node image, we don't need to copy any files or run any installation s
 
 So aside from deciding which image you are going to use, there is really nothing else we need to do before we create our config file.  
 
-## Connect the App to the Database
+## Connecting the App to the Database
 
 Before we create the Docker Compose configure file to link the database container, we need to update our app to actually use it.  
 
@@ -602,7 +602,7 @@ myPromise.then(() => {
 
 In the above code update you can see that we are serving up a directory called `public` that we have not created yet.  That directory will contain an `index.html` file to act as the nice looking frontend for our app.
 
-## Add a Frontend
+## Adding a Frontend
 
 We'll begin by creating the `public` directory that is being served from our Node app:
 
@@ -692,7 +692,7 @@ Once it is returned it will iterate through each employee and clone the HTML tem
 
 Phew!  Now that we have our app established and ready to read from the database, we are finally ready to connect our Node container and our PostgreSQL container together with Docker Compose.
 
-## Create a Docker Compose YML File
+## Creating a Docker Compose YML File
 
 For a brief intro to compose see [here](https://docs.docker.com/compose/),  and for more details than you can ever handle about the compose file spec see [here](https://github.com/compose-spec/compose-spec/blob/master/spec.md).
 
@@ -767,7 +767,7 @@ docker-compose down
 
 And there you have it, a fullstack Node.js application with its own SQL database bundled along with it.  You can now deploy this literally anywhere that has Docker installed and you know that it will work because you have defined all the parameters of the exact environment it needs to function.
 
-## Add a pgAdmin Panel (Bonus)
+## Adding a pgAdmin Panel (Bonus)
 
 Here's a quick little bonus for those of you who are using PostgreSQL.  Adding the pgAdmin panel container to this app setup is a breeze.  SImply update your `docker-compose.yml` config to include the following:
 
