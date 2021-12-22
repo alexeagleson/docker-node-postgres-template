@@ -14,6 +14,7 @@ All code from this tutorial as a complete package is available in [this reposito
 
 ## Table of Contents
 
+1. [Introduction](#introduction)
 1. [What is Docker?](#what-is-docker)
 1. [Prerequisites](#prerequisites)
 1. [Installing Docker](#installing-docker)
@@ -30,6 +31,12 @@ All code from this tutorial as a complete package is available in [this reposito
 1. [Create a Docker Compose YML File](#create-a-docker-compose-yml-file)
 1. [Add a pgAdmin Panel (Bonus)](#add-a-pgadmin-panel-bonus)
 1. [Wrapping Up](#wrapping-up)
+
+## Introduction
+
+In this tutorial you will learn what Docker is and what purpose it serves by building a fullstack Node.js app complete with frontend and PostgreSQL database.  
+
+We will use Docker Compose to connect and network each container together so that they are easy to share among project contributors, and deploy to whatever hosting service you've chosen.
 
 ### What is Docker?
 
