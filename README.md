@@ -10,7 +10,13 @@ And go to [http://localhost:8080]()
 
 ## Tutorial
 
-All code from this tutorial as a complete package is available in [this repository](https://github.com/alexeagleson/docker-node-postgres-template).
+All code from this tutorial as a complete package is available in [this repository](https://github.com/alexeagleson/docker-node-postgres-template).  If you find this tutorial helpful, please share it with your friends and colleagues!
+
+For more tutorials like this, follow me <a href="https://twitter.com/eagleson_alex?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">@eagleson_alex</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> on Twitter
+
+A video version is also available:
+
+{% youtube https://youtu.be/Te41e4urFO0 %}
 
 ## Table of Contents
 
@@ -30,6 +36,7 @@ All code from this tutorial as a complete package is available in [this reposito
 1. [Adding a Frontend](#add-a-frontend)
 1. [Creating a Docker Compose YML File](#creating-a-docker-compose-yml-file)
 1. [Adding a pgAdmin Panel (Bonus)](#add-a-pgadmin-panel-bonus)
+1. [Useful Docker Commands](#useful-docker-commands)
 1. [Wrapping Up](#wrapping-up)
 
 ## Introduction
@@ -133,8 +140,9 @@ Congratulations!  You have run your first Docker container!  Although you can ma
 
 ```bash
 docker image ls
-```
-```
+
+# OR
+
 docker container ls
 ```
 
@@ -148,8 +156,9 @@ While working with Docker you'll find that sometimes these images and containers
 
 ```bash
 docker image prune
-```
-```
+
+# OR
+
 docker container prune
 ```
 
@@ -288,7 +297,7 @@ The code above creates a new promise that always rejects.  It will run (with a w
 
 Now obviously we could just... add a catch block (or remove the code entirely), but we are trying to replicate a scenario where you are working with an older codebase and you may not necessarily have those options available to you.  
 
-Let's say for one reason or another this app _must_ be run on Node v15 to work.  Every developer on the team must be prepared to operate in that environment... but our company also has a new app that runs on Node v17!  So we need that environment available too.  
+Let's say for one reason or another this app _must_ be run on Node v14 or earlier to work.  Every developer on the team must be prepared to operate in that environment... but our company also has a new app that runs on Node v17!  So we need that environment available too.  
 
 And while we're at it, some other tool on version X! I only have version Y on my machine!  Who knows what version the other members of my team are running.  Or the guy I send the app to for testing.  
 
@@ -508,7 +517,7 @@ Our goal here is going to be to create a database with some very simple data (li
 
 We'll also create a simple frontend to display that data.
 
-First we need to install the PostgresSQL NPM package:
+First we need to install the PostgreSQL NPM package:
 
 ```bash
 npm install pg
@@ -675,12 +684,18 @@ Above in `styles.css` is some simple CSS to give a clean look to the employee ca
 fetch("/employees")
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     data.forEach((employee) => {
+      // Select the <template> we created in index.html
       const cardTemplate = document.querySelector('template');
+
+      // Clone a copy of the template we can insert in the DOM as a real visible node
       const card = cardTemplate.content.cloneNode(true);
+
+      // Update the content of the cloned template with the employee data we queried from the backend
       card.querySelector('h4').innerText = employee.name;
       card.querySelector('p').innerText = employee.title;
+
+      // Append the card as a child with the employee data to the <body> element on our page
       document.body.appendChild(card);
     });
   });
@@ -737,7 +752,7 @@ services:
       # Standard port for PostgreSQL databases
       - "5432:5432"
     volumes:
-      # When the PostgresSQL container is started it will run any scripts
+      # When the PostgreSQL container is started it will run any scripts
       # provided in the `docker-entrypoint-initdb.d` directory, this connects
       # our seed file to that directory so that it gets run
       - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
@@ -769,7 +784,7 @@ And there you have it, a fullstack Node.js application with its own SQL database
 
 ## Adding a pgAdmin Panel (Bonus)
 
-Here's a quick little bonus for those of you who are using PostgreSQL.  Adding the pgAdmin panel container to this app setup is a breeze.  SImply update your `docker-compose.yml` config to include the following:
+Here's a quick little bonus for those of you who are using PostgreSQL.  Adding the pgAdmin panel container to this app setup is a breeze.  Simply update your `docker-compose.yml` config to include the following:
 
 `docker-compose.yml`
 ```yml
@@ -855,6 +870,58 @@ To see your data.
 
 ![pgAdmin Employee Data](https://res.cloudinary.com/dqse2txyi/image/upload/v1640152679/blogs/docker-node/pg-admin_ozybu2.png)
 
+## Useful Docker Commands
+
+List all containers, images, volumes or networks, for example `docker image ls`.
+
+```bash
+docker {container}/{image}/{volume}/{network} ls
+```
+
+Remove a container, image, volume or network where ID is the id of the container/image/volume or network.
+
+```bash
+docker {container}/{image}/{volume}/{network} rm ID
+```
+
+Start a container in the background (as a daemon):
+
+```bash
+docker run -d IMAGE_ID
+```
+
+View logs of a container:
+
+```bash
+docker container logs CONTAINER_ID
+```
+
+View information about a container:
+
+```bash
+docker container inspect CONTAINER_ID
+```
+
+Open a shell inside an active container so you can run terminal commands inside of it.  
+
+```bash
+docker exec -it CONTAINER_ID /bin/sh
+```
+
+Stop a container:
+
+```bash
+docker container stop CONTAINER_ID
+```
+
+Remove all dangling/unused Docker data (cached layers, volumes no longer used, etc):
+
+```bash
+docker system prune
+```
+
+You can also use the above command with a specific type, like `docker container prune`.  
+
 ## Wrapping Up
 
 I hope you learned a lot about why Docker is a fantastic tool in your toolbelt and how you can use it to reduce the amount of friction related to setting up development environments.  The days of fighting with WAMP and MAMP and XAMPP are thankfully long behind us (no slight against those apps, I know they're fantastic tools when configured properly).
@@ -864,6 +931,8 @@ Remember that Docker can be used both to create a baseline standard development 
 And there's plenty more to learn well beyond what's covered here, the [Docker docs](https://docs.docker.com/) are the best place to start.  All the best in your Docker journey.  
 
 Please check some of my other learning tutorials.  Feel free to leave a comment or question and share with others if you find any of them helpful:
+
+- [Introduction to Docker for Javascript Developers](https://dev.to/alexeagleson/docker-for-javascript-developers-41me)
 
 - [Learnings from React Conf 2021](https://dev.to/alexeagleson/learnings-from-react-conf-2021-17lg)
 
