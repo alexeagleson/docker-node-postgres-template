@@ -964,3 +964,7 @@ Please check some of my other learning tutorials.  Feel free to leave a comment 
 - [Webpack: The Basics](https://dev.to/alexeagleson/understanding-the-modern-web-stack-webpack-part-1-2mn1)
 
 - [Webpack: Loaders, Optimizations & Bundle Analysis](https://dev.to/alexeagleson/understanding-the-modern-web-stack-webpack-part-2-49bj)
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
